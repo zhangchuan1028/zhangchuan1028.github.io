@@ -1,0 +1,676 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>李英英 个人科研主页 | Ying-Ying Li Research Homepage</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/v4-shims.min.css" rel="stylesheet">
+    <script>
+        // 配置Tailwind自定义颜色和字体
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#64ffda',
+                        secondary: '#36CFC9',
+                        dark: '#1D2129',
+                        light: '#F2F3F5'
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .transition-custom {
+                transition: all 0.3s ease-in-out;
+            }
+        }
+    </style>
+    <style>
+        /* 平滑滚动 */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* 卡片悬停效果 */
+        .card-hover {
+            @apply transition-custom hover:shadow-lg hover:-translate-y-1;
+        }
+        /* 语言切换按钮效果 */
+        .lang-btn {
+            @apply px-3 py-1 rounded-full text-sm font-medium transition-custom;
+        }
+        .lang-btn.active {
+            @apply bg-primary text-white;
+        }
+        .lang-btn:not(.active) {
+            @apply bg-light text-white hover:bg-light/80;
+        }
+    </style>
+</head>
+<body class="font-inter text-white bg-[#0a192f] pt-16">
+    <div id="particle-container"></div>
+
+    <!-- 导航栏 -->
+    <nav id="navbar" class="sticky top-0 left-0 right-0 w-full py-4 px-6 md:px-12 z-50 transition-custom bg-[#0a192f]/80 backdrop-blur-sm">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-atom text-primary text-2xl"></i>
+                <h1 class="text-xl md:text-2xl font-bold text-primary" data-lang="zh">李英英 科研主页</h1>
+                <h1 class="text-xl md:text-2xl font-bold text-primary hidden" data-lang="en">Ying-Ying Li Research Homepage</h1>
+            </div>
+            <!-- 导航链接 - 桌面端 -->
+            <div class="hidden md:flex space-x-8">
+                <a href="#personal" class="text-white hover:text-primary transition-custom" data-lang="zh">个人信息</a>
+                <a href="#education" class="text-white hover:text-primary transition-custom" data-lang="zh">教育经历</a>
+                <a href="#work" class="text-white hover:text-primary transition-custom" data-lang="zh">工作经历</a>
+                <a href="#awards" class="text-white hover:text-primary transition-custom" data-lang="zh">获奖情况</a>
+                <a href="#members" class="text-white hover:text-primary transition-custom" data-lang="zh">团队成员</a>
+                <a href="#activities" class="text-white hover:text-primary transition-custom" data-lang="zh">学术活动</a>
+                <a href="#recruitment" class="text-white hover:text-primary transition-custom" data-lang="zh">招生信息</a>
+                
+                <a href="#personal" class="text-white hover:text-primary transition-custom hidden" data-lang="en">Personal Info</a>
+                <a href="#education" class="text-white hover:text-primary transition-custom hidden" data-lang="en">Education</a>
+                <a href="#work" class="text-white hover:text-primary transition-custom hidden" data-lang="en">Work Experience</a>
+                <a href="#awards" class="text-white hover:text-primary transition-custom hidden" data-lang="en">Awards</a>
+                <a href="#members" class="text-white hover:text-primary transition-custom hidden" data-lang="en">Group Members</a>
+                <a href="#activities" class="text-white hover:text-primary transition-custom hidden" data-lang="en">Academic Activities</a>
+                <a href="#recruitment" class="text-white hover:text-primary transition-custom hidden" data-lang="en">Join Our Group</a>
+                <!-- 语言切换 -->
+                <button id="lang-toggle" class="lang-btn">English</button>
+            </div>
+            <!-- 移动端菜单按钮 -->
+            <button id="menu-btn" class="md:hidden text-white">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+        <!-- 移动端导航菜单 -->
+        <div id="mobile-menu" class="md:hidden hidden bg-gray-900/80 shadow-lg rounded-lg mt-2 p-4">
+            <div class="flex flex-col space-y-3">
+                <a href="#personal" class="text-white hover:text-primary transition-custom" data-lang="zh">个人信息</a>
+                <a href="#education" class="text-white hover:text-primary transition-custom" data-lang="zh">教育经历</a>
+                <a href="#work" class="text-white hover:text-primary transition-custom" data-lang="zh">工作经历</a>
+                <a href="#awards" class="text-white hover:text-primary transition-custom" data-lang="zh">获奖情况</a>
+                <a href="#members" class="text-white hover:text-primary transition-custom" data-lang="zh">团队成员</a>
+                <a href="#activities" class="text-white hover:text-primary transition-custom" data-lang="zh">学术活动</a>
+                <a href="#recruitment" class="text-white hover:text-primary transition-custom" data-lang="zh">招生信息</a>
+                
+                <a href="#personal" class="text-white hover:text-primary transition-custom hidden" data-lang="en">Personal Info</a>
+                <a href="#education" class="text-white hover:text-primary transition-custom hidden" data-lang="en">Education</a>
+                <a href="#work" class="text-white hover:text-primary transition-custom hidden" data-lang="en">Work Experience</a>
+                <a href="#awards" class="text-white hover:text-primary transition-custom hidden" data-lang="en">Awards</a>
+                <a href="#members" class="text-white hover:text-primary transition-custom hidden" data-lang="en">Group Members</a>
+                <a href="#activities" class="text-white hover:text-primary transition-custom hidden" data-lang="en">Academic Activities</a>
+                <a href="#recruitment" class="text-white hover:text-primary transition-custom hidden" data-lang="en">Join Our Group</a>
+                <!-- 移动端语言切换按钮 -->
+                <button id="lang-toggle-mobile" class="lang-btn w-full mt-2 text-left px-0 py-1">English</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 头部区域 -->
+    <header class="bg-[#0a192f] text-white py-12 md:py-20 px-6 md:px-12">
+        <div class="container mx-auto flex flex-col md:flex-row items-center justify-center md:justify-between gap-8">
+            <div class="flex flex-col items-center md:items-start text-center md:text-left">
+                <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-shadow mb-2" data-lang="zh">李英英</h1>
+                <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-shadow mb-2 hidden" data-lang="en">Ying-Ying Li</h1>
+                <p class="text-[clamp(1rem,2vw,1.5rem)] mb-4" data-lang="zh">副研究员 | 中国科学院高能物理研究所</p>
+                <p class="text-[clamp(1rem,2vw,1.5rem)] mb-4 hidden" data-lang="en">Associate professor | Institute of High Energy Physics, CAS</p>
+                <div class="flex flex-wrap justify-center md:justify-start gap-4">
+
+                    <a href="https://inspirehep.net/authors/1372172" target="_blank" class="flex items-center space-x-2 bg-white/20 hover:bg-white/30 px-4 py-2 rounded-full transition-custom">
+                        <i class="fas fa-user"></i>
+                        <span data-lang="zh">INSPIRE</span>
+                        <span data-lang="en" class="hidden">INSPIRE</span>
+                    </a>
+                </div>
+            </div>
+            <div class="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-white/30 shadow-xl">
+                <img src="https://aka.doubaocdn.com/s/k5Ow1w15XM?alice_filename=%25E6%259D%258E%25E8%258B%25B1%25E8%258B%25B1%25E5%25A4%25B4%25E5%2583%258F.jpg" alt="李英英头像" class="w-full h-full object-cover">
+            </div>
+        </div>
+    </header>
+
+    <!-- 主体内容 -->
+    <main class="container mx-auto px-6 md:px-12 py-10">
+        <!-- 个人信息 -->
+        <section id="personal" class="mb-16">
+            <div class="flex items-center mb-6">
+                <i class="fas fa-user-circle text-primary text-3xl mr-3"></i>
+                <h2 class="text-2xl md:text-3xl font-bold" data-lang="zh">个人信息</h2>
+                <h2 class="text-2xl md:text-3xl font-bold hidden" data-lang="en">Personal Information</h2>
+            </div>
+            <div class="bg-gray-900/80 backdrop-blur-sm rounded-xl shadow-md p-6 md:p-8 card-hover text-white">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="font-semibold text-lg mb-2 text-primary" data-lang="zh">基本信息</h3>
+                        <h3 class="font-semibold text-lg mb-2 text-primary hidden" data-lang="en">Basic Information</h3>
+                        <ul class="space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-id-card text-secondary mt-1 mr-3"></i>
+                                <span data-lang="zh">姓名：李英英</span>
+                                <span data-lang="en" class="hidden">Name: Ying-Ying Li</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-envelope text-secondary mt-1 mr-3"></i>
+                                <span data-lang="zh">电子邮箱：liyingying@ihep.ac.cn</span>
+                                <span data-lang="en" class="hidden">Email: liyingying@ihep.ac.cn</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-map-marker-alt text-secondary mt-1 mr-3"></i>
+                                <span data-lang="zh">地址：理论物理室，高能物理研究所</span>
+                                <span data-lang="en" class="hidden">Address: Theoretical Physics Division, Institute of High Energy Physics</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-lg mb-2 text-primary" data-lang="zh">研究领域</h3>
+                        <h3 class="font-semibold text-lg mb-2 text-primary hidden" data-lang="en">Research Field</h3>
+                        <p data-lang="zh">粒子物理理论与唯象学</p>
+                        <p data-lang="en" class="hidden">Theoretical and Phenomenological Particle Physics</p>
+                        
+                        <h3 class="font-semibold text-lg mb-2 text-primary mt-4" data-lang="zh">研究方向</h3>
+                        <h3 class="font-semibold text-lg mb-2 text-primary mt-4 hidden" data-lang="en">Research Interests</h3>
+                        <ul class="space-y-1" data-lang="zh">
+                            <li>• 对撞机唯象学</li>
+                            <li>• 希格斯物理</li>
+                            <li>• 中微子唯象学</li>
+                            <li>• 第一性原理计算</li>
+                            <li>• 量子模拟</li>
+                        </ul>
+                        <ul class="space-y-1 hidden" data-lang="en">
+                            <li>• Collider Phenomenology</li>
+                            <li>• Higgs Physics</li>
+                            <li>• Neutrino Phenomenology</li>
+                            <li>• First-principle Calculations</li>
+                            <li>• Quantum Simulation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 教育经历 -->
+        <section id="education" class="mb-16">
+            <div class="flex items-center mb-6">
+                <i class="fas fa-graduation-cap text-primary text-3xl mr-3"></i>
+                <h2 class="text-2xl md:text-3xl font-bold" data-lang="zh">教育经历</h2>
+                <h2 class="text-2xl md:text-3xl font-bold hidden" data-lang="en">Education</h2>
+            </div>
+            <div class="bg-gray-900/80 backdrop-blur-sm rounded-xl shadow-md p-6 md:p-8 card-hover text-white">
+                <div class="space-y-6">
+                    <div class="border-l-4 border-primary pl-4 py-2">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-2">
+                            <h3 class="font-semibold text-lg" data-lang="zh">香港科技大学物理系</h3>
+                            <h3 class="font-semibold text-lg hidden" data-lang="en">Department of Physics, Hong Kong University of Science and Technology</h3>
+                            <span class="text-gray-500 text-sm" data-lang="zh">2014–2019</span>
+                            <span class="text-gray-500 text-sm hidden" data-lang="en">2014–2019</span>
+                        </div>
+                        <p data-lang="zh">哲学(物理学)博士</p>
+                        <p data-lang="en" class="hidden">Ph.D. in Philosophy (Physics)</p>
+                    </div>
+                    <div class="border-l-4 border-primary pl-4 py-2">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-2">
+                            <h3 class="font-semibold text-lg" data-lang="zh">北京师范大学物理系</h3>
+                            <h3 class="font-semibold text-lg hidden" data-lang="en">Department of Physics, Beijing Normal University</h3>
+                            <span class="text-gray-500 text-sm" data-lang="zh">2010–2014</span>
+                            <span class="text-gray-500 text-sm hidden" data-lang="en">2010–2014</span>
+                        </div>
+                        <p data-lang="zh">理学学士</p>
+                        <p data-lang="en" class="hidden">B.S. in Physics</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 工作经历 -->
+        <section id="work" class="mb-16">
+            <div class="flex items-center mb-6">
+                <i class="fas fa-briefcase text-primary text-3xl mr-3"></i>
+                <h2 class="text-2xl md:text-3xl font-bold" data-lang="zh">工作经历</h2>
+                <h2 class="text-2xl md:text-3xl font-bold hidden" data-lang="en">Work Experience</h2>
+            </div>
+            <div class="bg-gray-900/80 backdrop-blur-sm rounded-xl shadow-md p-6 md:p-8 card-hover text-white">
+                <div class="space-y-6">
+                    <div class="border-l-4 border-primary pl-4 py-2">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-2">
+                            <h3 class="font-semibold text-lg" data-lang="zh">高能物理研究所</h3>
+                            <h3 class="font-semibold text-lg hidden" data-lang="en">Institute of High Energy Physics</h3>
+                            <span class="text-gray-500 text-sm" data-lang="zh">2025–至今</span>
+                            <span class="text-gray-500 text-sm hidden" data-lang="en">2025–Present</span>
+                        </div>
+                        <p data-lang="zh">副研究员</p>
+                        <p data-lang="en" class="hidden">Associate professor</p>
+                    </div>
+                    <div class="border-l-4 border-primary pl-4 py-2">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-2">
+                            <h3 class="font-semibold text-lg" data-lang="zh">中国科学技术大学近代物理系</h3>
+                            <h3 class="font-semibold text-lg hidden" data-lang="en">Department of Modern Physics, University of Science and Technology of China</h3>
+                            <span class="text-gray-500 text-sm" data-lang="zh">2023–2024</span>
+                            <span class="text-gray-500 text-sm hidden" data-lang="en">2023–2024</span>
+                        </div>
+                        <p data-lang="zh">副研究员</p>
+                        <p data-lang="en" class="hidden">Assistant Professor</p>
+                    </div>
+                    <div class="border-l-4 border-primary pl-4 py-2">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-2">
+                            <h3 class="font-semibold text-lg" data-lang="zh">美国费米国家加速器实验室（Fermilab）</h3>
+                            <h3 class="font-semibold text-lg hidden" data-lang="en">Fermi National Accelerator Laboratory (Fermilab), USA</h3>
+                            <span class="text-gray-500 text-sm" data-lang="zh">2019–2022</span>
+                            <span class="text-gray-500 text-sm hidden" data-lang="en">2019–2022</span>
+                        </div>
+                        <p data-lang="zh">博士后</p>
+                        <p data-lang="en" class="hidden">Research Associate</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 获奖情况 -->
+        <section id="awards" class="mb-16">
+            <div class="flex items-center mb-6">
+                <i class="fas fa-trophy text-primary text-3xl mr-3"></i>
+                <h2 class="text-2xl md:text-3xl font-bold" data-lang="zh">获奖情况</h2>
+                <h2 class="text-2xl md:text-3xl font-bold hidden" data-lang="en">Awards</h2>
+            </div>
+            <div class="bg-gray-900/80 backdrop-blur-sm rounded-xl shadow-md p-6 md:p-8 card-hover text-white">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-4">
+                        <div class="bg-gray-900/80 rounded-lg p-4">
+                            <h3 class="font-semibold text-primary mb-1" data-lang="zh">Simons Emmy Noether Fellowship</h3>
+                            <h3 class="font-semibold text-primary mb-1 hidden" data-lang="en">Simons Emmy Noether Fellowship</h3>
+                            <p data-lang="zh">加拿大圆周研究所</p>
+                            <p data-lang="en" class="hidden">Perimeter Institute for Theoretical Physics, Canada</p>
+                            <span class="text-white text-sm" data-lang="zh">2025–2026</span>
+                            <span class="text-white text-sm hidden" data-lang="en">2025–2026</span>
+                        </div>
+                        <div class="bg-gray-900/80 rounded-lg p-4">
+                            <h3 class="font-semibold text-primary mb-1" data-lang="zh">IPPP DIVA award</h3>
+                            <h3 class="font-semibold text-primary mb-1 hidden" data-lang="en">IPPP DIVA award</h3>
+                            <p data-lang="zh">英国杜伦大学粒子物理唯象学研究中心</p>
+                            <p data-lang="en" class="hidden">Institute for Particle Physics Phenomenology, Durham University, UK</p>
+                            <span class="text-white text-sm" data-lang="zh">2024–2025</span>
+                            <span class="text-white text-sm hidden" data-lang="en">2024–2025</span>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-gray-900/80 rounded-lg p-4">
+                            <h3 class="font-semibold text-primary mb-1" data-lang="zh">KITP Fellow 博士奖学金</h3>
+                            <h3 class="font-semibold text-primary mb-1 hidden" data-lang="en">KITP Fellow</h3>
+                            <p data-lang="zh">加州大学圣芭芭拉分校卡弗里理论物理研究所</p>
+                            <p data-lang="en" class="hidden">Kavli Institute for Theoretical Physics, University of California, Santa Barbara, USA</p>
+                            <span class="text-white text-sm" data-lang="zh">2018</span>
+                            <span class="text-white text-sm hidden" data-lang="en">2018</span>
+                        </div>
+                        <div class="bg-gray-900/80 rounded-lg p-4">
+                            <h3 class="font-semibold text-primary mb-1" data-lang="zh">香港政府博士奖学金计划(HKPFS)</h3>
+                            <h3 class="font-semibold text-primary mb-1 hidden" data-lang="en">Hong Kong PhD Fellowship Scheme (HKPFS)</h3>
+                            <p data-lang="zh">香港研究资助局</p>
+                            <p data-lang="en" class="hidden">Research Grants Council of Hong Kong</p>
+                            <span class="text-white text-sm" data-lang="zh">2014–2017</span>
+                            <span class="text-white text-sm hidden" data-lang="en">2014–2017</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+        <!-- 现有成员 -->
+        <section id="members" class="mb-16">
+            <div class="flex items-center mb-6">
+                <i class="fas fa-users text-primary text-3xl mr-3"></i>
+                <h2 class="text-2xl md:text-3xl font-bold" data-lang="zh">团队成员</h2>
+                <h2 class="text-2xl md:text-3xl font-bold hidden" data-lang="en">Group Members</h2>
+            </div>
+            <div class="bg-gray-900/80 backdrop-blur-sm rounded-xl shadow-md p-6 md:p-8 card-hover text-white">
+                <h3 class="font-semibold text-lg text-primary mb-4" data-lang="zh">现有成员</h3>
+                <h3 class="font-semibold text-lg text-primary mb-4 hidden" data-lang="en">Present Members</h3>
+                <ul class="space-y-3 pl-5 list-disc text-white text-lg">
+                    <li data-lang="zh">王一霖 - 博士生</li>
+                    <li data-lang="en" class="hidden">Yi-Lin Wang - PhD student</li>
+                    <li data-lang="zh">罗彦 - 博士后（入选2025年度中德博士后交流项目，与杨洪洮联合指导）</li>
+                    <li data-lang="en" class="hidden">Yan Luo - Postdoc (Joint with Hongtao Yang)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 学术活动 -->
+        <section id="activities" class="mb-16">
+            <div class="flex items-center mb-6">
+                <i class="fas fa-microphone text-primary text-3xl mr-3"></i>
+                <h2 class="text-2xl md:text-3xl font-bold" data-lang="zh">学术活动</h2>
+                <h2 class="text-2xl md:text-3xl font-bold hidden" data-lang="en">Academic Activities</h2>
+            </div>
+            <div class="bg-gray-900/80 backdrop-blur-sm rounded-xl shadow-md p-6 md:p-8 card-hover text-white">
+                <h3 class="font-semibold text-lg text-primary mb-4" data-lang="zh">会议邀请/大会报告</h3>
+                <h3 class="font-semibold text-lg text-primary mb-4 hidden" data-lang="en">Invited/Plenary Talks at Conferences</h3>
+                <ul class="space-y-2 pl-5 list-disc">
+                    <li><a href="https://www.theorie.physik.uni-muenchen.de/activities/workshops/quanthep2024/index.html" target="_blank" class="text-white hover:text-white/80 transition-custom"><strong>QuantHEP2024 Munich, Germany</strong></a>, 2024, "QEC-informed encoding of gauge theories for quantum simulation".</li>
+                    <li><a href="https://indico.ihep.ac.cn/event/22101/" target="_blank" class="text-white hover:text-white/80 transition-custom"><strong>28th Mini-workshop on the frontier of LHC, China</strong></a>, 2024, "HEP opportunities in the quantum computing era".</li>
+                    <li><a href="https://indico.lyu.edu.cn/event/8/" target="_blank" class="text-white hover:text-white/80 transition-custom"><strong>18th TeV workshop, China</strong></a>, 2024, "Recent progresses on quantum computing for high energy physics".</li>
+                    <li><a href="https://indico.cern.ch/event/1362087/timetable/#20240108" target="_blank" class="text-white hover:text-white/80 transition-custom"><strong>BSM in particle physics and cosmology: 50 years later, Vietnam</strong></a>, 2024, "Multimessenger Opportunities for Heavy Neutral Leptons".</li>
+                    <li><a href="https://indico.ibs.re.kr/event/571/" target="_blank" class="text-white hover:text-white/80 transition-custom"><strong>AI and Quantum Information for Particle Physics, Korea</strong></a>, 2023, "Digitizaiton and Propagation in quantum simulation for lattice gauge theories".</li>
+                    <li><a href="https://www.cie.org.cn/list_43/11746.html" target="_blank" class="text-white hover:text-white/80 transition-custom"><strong>Quantum Information and Technology Academic Exchange Conference, China</strong></a>, 2023, "Quantum Computing for Lattice Gauge Theories".</li>
+                    <li><a href="https://indico-tdli.sjtu.edu.cn/event/1604/" target="_blank" class="text-white hover:text-white/80 transition-custom"><strong>TDLI-PKU BSM Workshop 2023: Looking to the Sky, China</strong></a>, 2023, "Neutrino magnetic moment portal: New constraints and multi-messenger opportunities".</li>
+                    <li><a href="https://indico.fis.ucm.es/event/18/overview" target="_blank" class="text-white hover:text-white/80 transition-custom"><strong>HFT for QCD and hadron physics, Spain</strong></a>, 2023, "Accelerating the timeline for quantum simulations in high energy physics".</li>
+                    <li><a href="https://www.munich-iapbp.de/quantum-computing" target="_blank" class="text-white hover:text-white/80 transition-custom"><strong>Quantum computing methods for high energy physics, Germany</strong></a>, 2023, "Reducing quantum resources for HEP simulations with algorithmic improvements and classical resources".</li>
+                    <li><a href="https://indico.cern.ch/event/1215937/timetable/#20230212.detailed" target="_blank" class="text-white hover:text-white/80 transition-custom"><strong>IAS Program on High Energy Physics, HKUST</strong></a>, 2023, "Quantum simulation for high energy physics".</li>
+                    <li><a href="https://indico.cern.ch/event/1190278/" target="_blank" class="text-white hover:text-white/80 transition-custom"><strong>QT4HEP22, CERN</strong></a>, 2022, "Quantum computing for lattice gauge theories".</li>
+                    <li><a href="https://indico.ipmu.jp/event/244/" target="_blank" class="text-white hover:text-white/80 transition-custom"><strong>43rd Johns Hopkins Workshop, IPMU Japan</strong></a>, 2019, "Anatomy of tthh Physics".</li>
+                    <li><a href="https://indico.ihep.ac.cn/event/7389/timetable/?view=standard" target="_blank" class="text-white hover:text-white/80 transition-custom"><strong>2018 CEPC Workshop, China</strong></a>, 2018, "Optimizing Higgs factories by modifying the recoil mass".</li>
+                    <li><a href="https://indico.cern.ch/event/460471/overview" target="_blank" class="text-white hover:text-white/80 transition-custom"><strong>The PITT-PACC workshop: Higgs and Beyond, USA</strong></a>, 2015, "Heavy higgs bosons: from LHC to 100 TeV pp-collider".</li>
+                    <li><a href="https://www.physics.umass.edu/acfi/news/blv-2015-international-workshop-on-baryon-and-lepton-number-violation" target="_blank" class="text-white hover:text-white/80 transition-custom"><strong>BLV 2015: International workshop on baryon and lepton number violation, USA</strong></a>, 2015, "Heavy Higgs bosons at 14 TeV and 100 TeV".</li>
+                    <li><strong>The workshop: East China Particle Physics Working Group: LHC and Beyond, China, 2015</strong>, "Heavy Higgs bosons at 14 TeV and 100 TeV".</li>
+                </ul>
+
+                <h3 class="font-semibold text-lg text-primary mb-4 mt-6" data-lang="zh">学术研讨会报告</h3>
+                <h3 class="font-semibold text-lg text-primary mb-4 mt-6 hidden" data-lang="en">Seminar Talks</h3>
+                <ul class="space-y-2 pl-5 list-disc">
+                    <li><strong>Nankai University</strong>, "Keeping Gauge Redundancies on a Quantum Computer", May. 2024.</li>
+                    <li><strong>Central China Normal University</strong>, "HEP opportunities in the Quantum Computing Era", May. 2024.</li>
+                    <li><strong>SJTU INPAC/TDLI Joint Seminar</strong>, "Gauge-redundant digitizations of lattice field theories on a Quantum Computer", Apr. 2024.</li>
+                    <li><strong>Fudan University</strong>, "Gauge-redundant digitizations of lattice field theories on a Quantum Computer", Apr. 2024.</li>
+                    <li><strong>Peking University</strong>, "Quantum computing for high energy physics", Mar. 2024.</li>
+                    <li><strong>SCNU IQM Seminars</strong>, "Quantum simulation for high energy physics", Jun. 2023.</li>
+                    <li><strong>CERN BSM Forum</strong>, "Anatomy of the electroweak phase transition for dark sector induced Baryogenesis", May. 2023.</li>
+                    <li><strong>CERN QTI theory forum</strong>, "Quantum simulation for high energy physics", May. 2023.</li>
+                    <li><strong>Institute of High Energy Physics, Chinese Academy of Science</strong>, "Quantum simulation for high energy physics", Mar. 2023.</li>
+                    <li><strong>University of Oregon</strong>, "Quantum simulation for high energy physics", Nov. 2022.</li>
+                    <li><strong>HKUST, IAS Seminar</strong>, "Quantum simulation for high energy physics", Oct. 2022.</li>
+                    <li><strong>MIT Center for Theoretical Physics Seminar</strong>, "Lattice Renormalization of Quantum Simulation", Nov. 2021.</li>
+                    <li><strong>University of Massachusetts Amherst, Department of Physics, ACFI Seminar</strong>, "Loops and Trees in Generic 4d EFT up to operator dimension 8", Mar. 2021.</li>
+                    <li><strong>Michigan Brown Bag Seminar</strong>, "Loops and Trees in Generic 4d EFT up to operator dimension 8", Mar.2021.</li>
+                    <li><strong>Caltech HEP Seminar</strong>, "Loops and Trees in Generic 4d EFT up to operator dimension 8", Mar. 2021.</li>
+                    <li><strong>Argonne National Laboratory HEP Theory Seminar</strong>, "Jet or Event?: Physics at Future e+e- Colliders", Nov. 2019.</li>
+                    <li><strong>Nanjing University HEP Seminar</strong>, "Anatomy of tthh Physics", Jun .2019.</li>
+                    <li><strong>Caltech HEP Seminar</strong>, " Heavy Higgs Bosons: from LHC to 100 TeV pp-collider", Dec. 2015.</li>
+                    <li><strong>Argonne National Laboratory</strong>, "Heavy Higgs Bosons at 14 TeV and 100 TeV", May. 2015.</li>
+                </ul>
+            </div>
+        </section>
+
+
+        <!-- 招生信息 -->
+        <section id="recruitment" class="mb-16">
+            <div class="flex items-center mb-6">
+                <i class="fas fa-user-graduate text-primary text-3xl mr-3"></i>
+                <h2 class="text-2xl md:text-3xl font-bold" data-lang="zh">招生信息</h2>
+                <h2 class="text-2xl md:text-3xl font-bold hidden" data-lang="en">Join Our Group</h2>
+            </div>
+            <div class="bg-gray-900/80 backdrop-blur-sm rounded-xl shadow-md p-6 md:p-8 card-hover text-white">
+                <div class="flex justify-center">
+                    <img src="https://aka.doubaocdn.com/s/aknV1w1O8k?alice_filename=%25E5%25B9%25BB%25E7%2581%25AF%25E7%2589%2587.png" alt="招生信息" class="w-[75%] h-auto rounded-lg">
+                </div>
+                <div class="flex justify-center mt-4">
+                    <p class="text-white/80 italic text-sm md:text-base hidden" data-lang="en">In youth, I heard of space that bends, of time that flows. Many years on, from quarks to stars, the questions endure: what unseen matter shapes the sky, what gives mass to the proton, what bridge unites the quantum and the vast? To hear the Way at dawn— even dusk would suffice.</p>
+                    <p class="text-white/80 italic text-sm md:text-base" data-lang="zh">年少时，我听闻空间的弯曲，时间的流动。多年后，从夸克到星辰，疑问依旧：何种无形之物塑造苍穹，何以赋予质子质量，又是哪一座桥，连接量子与浩瀚？朝闻其道——至暮，亦足矣。</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-8 px-6 md:px-12">
+        <div class="container mx-auto text-center">
+            <p data-lang="zh">© 2026 李英英 个人科研主页 | 中国科学院高能物理研究所</p>
+            <p data-lang="en" class="hidden">© 2026 Ying-Ying Li Research Homepage | Institute of High Energy Physics, CAS</p>
+
+        </div>
+    </footer>
+
+    <script>
+
+
+        // 移动端菜单切换
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 语言切换功能
+        const langToggleBtn = document.getElementById('lang-toggle');
+        const langToggleMobileBtn = document.getElementById('lang-toggle-mobile');
+        const zhElements = document.querySelectorAll('[data-lang="zh"]');
+        const enElements = document.querySelectorAll('[data-lang="en"]');
+        let currentLang = 'zh'; // 初始语言为中文
+
+        function switchLanguage() {
+            if (currentLang === 'zh') {
+                // 切换到英文
+                currentLang = 'en';
+                langToggleBtn.textContent = '中文';
+                langToggleMobileBtn.textContent = '中文';
+                // 显示所有英文内容，隐藏所有中文内容
+                enElements.forEach(el => el.classList.remove('hidden'));
+                zhElements.forEach(el => el.classList.add('hidden'));
+                document.documentElement.lang = 'en';
+            } else {
+                // 切换回中文
+                currentLang = 'zh';
+                langToggleBtn.textContent = 'English';
+                langToggleMobileBtn.textContent = 'English';
+                // 显示所有中文内容，隐藏所有英文内容
+                zhElements.forEach(el => el.classList.remove('hidden'));
+                enElements.forEach(el => el.classList.add('hidden'));
+                document.documentElement.lang = 'zh-CN';
+            }
+        }
+
+        // 绑定语言切换按钮的点击事件
+        langToggleBtn.addEventListener('click', switchLanguage);
+        langToggleMobileBtn.addEventListener('click', switchLanguage);
+
+        // 初始状态：确保中文内容显示，英文内容隐藏
+        zhElements.forEach(el => el.classList.remove('hidden'));
+        enElements.forEach(el => el.classList.add('hidden'));
+
+
+
+        // 点击导航链接关闭移动端菜单
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // 平滑滚动到锚点
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // 粒子动画初始化 - 正负电子对撞效果
+        function initParticles() {
+            const container = document.getElementById('particle-container');
+            // 设置粒子容器样式，覆盖整个网页
+            container.style.position = 'absolute';
+            container.style.top = '0';
+            container.style.left = '0';
+            container.style.width = '100%';
+            container.style.height = document.body.scrollHeight + 'px';
+            container.style.zIndex = '-1';
+            container.style.overflow = 'hidden';
+            container.style.background = 'transparent';
+
+            const particleCount = 50; // 减少粒子数量，解决微信浏览器摇晃问题
+            const particles = [];
+            const electronColor = '#1e88e5'; // 电子颜色（蓝色）
+            const positronColor = '#e53935'; // 正电子颜色（红色）
+            const photonColor = '#fdd835'; // 光子颜色（黄色）
+
+            // 创建粒子函数
+            function createParticle(isElectron) {
+                const particle = document.createElement('div');
+                const size = Math.random() * 4 + 2; // 2-6px大小
+                // 随机初始位置：从屏幕左侧或右侧进入
+                const x = isElectron ? -size : window.innerWidth + size;
+                const y = Math.random() * window.innerHeight;
+                // 速度：相向运动
+                const vx = isElectron ? (Math.random() * 2 + 1) : -(Math.random() * 2 + 1);
+                const vy = (Math.random() - 0.5) * 2; // 上下随机运动
+
+                particle.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    background-color: ${isElectron ? electronColor : positronColor};
+                    border-radius: 50%;
+                    opacity: 0.8;
+                    left: ${x}px;
+                    top: ${y}px;
+                `;
+
+                const particleData = {
+                    element: particle,
+                    x: x,
+                    y: y,
+                    vx: vx,
+                    vy: vy,
+                    type: isElectron ? 'electron' : 'positron',
+                    size: size
+                };
+
+                particles.push(particleData);
+                container.appendChild(particle);
+            }
+
+            // 初始化粒子
+            for (let i = 0; i < particleCount; i++) {
+                createParticle(i % 2 === 0); // 一半电子，一半正电子
+            }
+
+            // 碰撞检测函数
+            function checkCollision(particle1, particle2) {
+                if (particle1.type === particle2.type) return false; // 同类型不碰撞
+                const dx = particle1.x - particle2.x;
+                const dy = particle1.y - particle2.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                return distance < (particle1.size + particle2.size) / 2;
+            }
+
+            // 创建光子函数
+            function createPhoton(x, y) {
+                const photon = document.createElement('div');
+                const size = Math.random() * 3 + 1;
+                photon.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    background-color: ${photonColor};
+                    border-radius: 50%;
+                    opacity: 0.9;
+                    left: ${x}px;
+                    top: ${y}px;
+                `;
+                container.appendChild(photon);
+
+                // 光子向外扩散后消失
+                setTimeout(() => {
+                    photon.style.transition = 'all 0.5s ease-out';
+                    photon.style.transform = 'scale(2)';
+                    photon.style.opacity = '0';
+                    setTimeout(() => {
+                        if (photon.parentNode) {
+                            photon.parentNode.removeChild(photon);
+                        }
+                    }, 500);
+                }, 100);
+            }
+
+            // 动画循环
+            function animate() {
+                // 存储需要删除的粒子
+                const toRemove = [];
+
+                particles.forEach((particle, index) => {
+                    // 更新位置
+                    particle.x += particle.vx;
+                    particle.y += particle.vy;
+
+                    // 超出屏幕范围的粒子标记为删除
+                    if (particle.x < -particle.size || particle.x > window.innerWidth + particle.size ||
+                        particle.y < -particle.size || particle.y > window.innerHeight + particle.size) {
+                        toRemove.push(index);
+                        return;
+                    }
+
+                    // 更新元素位置
+                    particle.element.style.left = particle.x + 'px';
+                    particle.element.style.top = particle.y + 'px';
+
+                    // 检测与其他粒子的碰撞
+                    for (let j = index + 1; j < particles.length; j++) {
+                        const other = particles[j];
+                        if (checkCollision(particle, other)) {
+                            // 标记两个粒子为删除
+                            if (!toRemove.includes(index)) toRemove.push(index);
+                            if (!toRemove.includes(j)) toRemove.push(j);
+                            // 在碰撞位置创建光子
+                            createPhoton((particle.x + other.x) / 2, (particle.y + other.y) / 2);
+                            break;
+                        }
+                    }
+                });
+
+                // 删除需要移除的粒子
+                toRemove.sort((a, b) => b - a); // 从后往前删除，避免索引混乱
+                toRemove.forEach(index => {
+                    const particle = particles[index];
+                    if (particle.element.parentNode) {
+                        particle.element.parentNode.removeChild(particle.element);
+                    }
+                    particles.splice(index, 1);
+                });
+
+                // 补充新的粒子，保持总数
+                while (particles.length < particleCount) {
+                    createParticle(Math.random() < 0.5); // 随机创建电子或正电子
+                }
+
+                requestAnimationFrame(animate);
+            }
+
+            // 窗口大小变化时调整容器大小
+            window.addEventListener('resize', () => {
+                container.style.width = '100%';
+                container.style.height = document.body.scrollHeight + 'px';
+            });
+
+            animate();
+        }
+
+        // 页面加载完成后初始化粒子动画
+        window.addEventListener('load', initParticles);
+    </script>
+</body>
+</html>
